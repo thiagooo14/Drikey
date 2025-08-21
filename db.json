@@ -2,10 +2,10 @@
   "users": [
     {
       "id": 1,
-      "name": "Thiago Tavares",
-      "email": "thiago@email.com",
-      "password": "123456", 
-      "token": "fake-jwt-token-123456"
+      "email": "usuario@email.com",
+      "password": "senha123",
+      "name": "João Silva",
+      "role": "admin"
     }
   ]
 }
