@@ -7,7 +7,7 @@ import type {
   RegisterCredentials,
   AuthResponse,
   AuthContextType,
-} from '../types/types';
+} from '../types';
 
 interface AuthProviderProps {
   children: ReactNode;

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import type { LoginCredentials } from '../types/types';
+import type { LoginCredentials } from '../types';
+
 const Login = () => {
   const [credentials, setCredentials] = useState<LoginCredentials>({
     email: '',
