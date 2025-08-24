@@ -3,16 +3,31 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from 'react-router-dom';
+import AuthProvider from './context/AuthProvider';
 import Home from './page/Home';
+import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './page/Dashboard';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Home />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route
+            path='/dashboard'
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path='*' element={<Navigate to='/Home' replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
