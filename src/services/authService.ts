@@ -1,7 +1,14 @@
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken'
-import type { User, LoginCredentials, RegisterCredentials, AuthResponse, DashboardResponse, DashboardData, RecentActivity } from '../types/types'
+import type {
+  User,
+  LoginCredentials,
+  RegisterCredentials,
+  AuthResponse,
+  DashboardResponse,
+  DashboardData,
+  RecentActivity,
+} from '../types';
 
 const API_URL = 'http://localhost:3001';
 
@@ -145,21 +152,43 @@ class AuthService {
   }
 
   private generateSimpleJWT(user: User): string {
+    const header = {
+      alg: 'HS256',
+      typ: 'JWT',
+    };
+
     const payload = {
       sub: user.id,
       email: user.email,
       name: user.name,
       role: user.role,
+      iat: Math.floor(Date.now() / 1000),
+      exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 horas
     };
 
-    const secret = process.env.JWT_SECRET || 'sua_chave_secreta';
-    return jwt.sign(payload, secret, { expiresIn: '24h' });
+    // Em produção, usar uma biblioteca JWT adequada e chave secreta
+    const encodedHeader = btoa(JSON.stringify(header));
+    const encodedPayload = btoa(JSON.stringify(payload));
+    const signature = btoa(`signature_${user.id}_${Date.now()}`);
+
+    return `${encodedHeader}.${encodedPayload}.${signature}`;
   }
 
-  private decodeJWT(token: string): jwt.JwtPayload | string | null {
+  decodeJWT(token: string): Record<string, unknown> | null {
     try {
-      const secret = process.env.JWT_SECRET || 'sua_chave_secreta';
-      return jwt.verify(token, secret);
+      const parts = token.split('.');
+      if (parts.length !== 3) {
+        return null;
+      }
+
+      const payload = JSON.parse(atob(parts[1]));
+
+      // Verificar se o token não expirou
+      if (typeof payload.exp !== 'number' || payload.exp < Math.floor(Date.now() / 1000)) {
+        return null;
+      }
+
+      return payload;
     } catch {
       return null;
     }
@@ -174,6 +203,7 @@ class AuthService {
     const payload = this.decodeJWT(token);
     return payload !== null;
   }
+
   getCurrentUser(): Omit<User, 'password'> | null {
     if (!this.isAuthenticated()) {
       return null;
