@@ -63,7 +63,6 @@ const Login = () => {
       <form onSubmit={handleSubmit} className='login-form'>
         <div className='form-group'>
           <label htmlFor='email'>
-            <i className='fas fa-envelope'></i>
             Email
           </label>
           <input
@@ -80,7 +79,6 @@ const Login = () => {
 
         <div className='form-group'>
           <label htmlFor='password'>
-            <i className='fas fa-lock'></i>
             Senha
           </label>
           <input
@@ -103,7 +101,7 @@ const Login = () => {
             </>
           ) : (
             <>
-              <i className='fas fa-sign-in-alt'></i>
+              <i className='sign-in-alt'></i>
               Entrar
             </>
           )}
