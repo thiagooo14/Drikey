@@ -27,7 +27,7 @@ const Home = () => {
               className="home__switch-link"
               onClick={() => setIsLoginScreen(true)}
             >
-              Faça o Log-in
+              Conecte-se
             </span>
           </p>
         )}
