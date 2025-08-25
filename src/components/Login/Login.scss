@@ -1,0 +1,130 @@
+.login {
+  &__header {
+    font-size: 3rem;
+    color: #666666;
+    margin-bottom: 15px;
+    &--text {
+      font-size: 1rem;
+    }
+  }
+
+  &__form {
+    text-align: left;
+    &-group {
+      margin-bottom: 25px;
+    }
+    &-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      color: #555555;
+      font-weight: 500;
+    }
+    &-input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e1e5e9;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8f9fa;
+      box-sizing: border-box;
+      &:focus {
+        outline: none;
+        border-color: #e15200;
+        transform: translateY(-1px);
+        box-shadow: 0 0 8px rgba(185, 1, 5, 0.2);
+      }
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #e15200 0%, #b90105 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(185, 1, 5, 0.35);
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+
+  &__error-message {
+    color: #e74c3c;
+    background: rgba(231, 76, 60, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    border-left: 4px solid #e74c3c;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    &__header {
+      font-size: 2.2rem;
+
+      &--text {
+        font-size: 0.95rem;
+      }
+    }
+
+    &__form {
+      &-group {
+        padding: 0 20px;
+      }
+      &-input {
+        font-size: 0.95rem;
+        padding: 10px 12px;
+      }
+    }
+
+    &__btn {
+      font-size: 1rem;
+      padding: 12px;
+      &-wrapper {
+        padding: 0 20px;
+      }
+    }
+  }
+
+  @media (max-width: 400px) {
+    &__header {
+      font-size: 1.8rem;
+      text-align: center;
+
+      &--text {
+        font-size: 0.9rem;
+      }
+    }
+
+    &__form {
+      text-align: center;
+
+      &-label {
+        justify-content: center;
+      }
+    }
+
+    &__btn {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+  }
+}

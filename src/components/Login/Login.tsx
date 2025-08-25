@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import type { LoginCredentials } from '../../types';
-import './Login.scss'
+import './Login.scss';
 
 const Login = () => {
   const [credentials, setCredentials] = useState<LoginCredentials>({
@@ -57,58 +57,62 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login__header">
+    <div className='login'>
+      <div className='login__header'>
         <p className='login__header--text'>Faça Login para entrar</p>
       </div>
-      <form onSubmit={handleSubmit} className="login__form">
-        <div className="login__form--group">
-          <label htmlFor="email" className="login__label">
+      <form onSubmit={handleSubmit} className='login__form'>
+        <div className='login__form-group'>
+          <label htmlFor='email' className='login__form-label'>
             Email
           </label>
           <input
-            type="email"
-            id="email"
-            name="email"
+            className='login__form-input'
+            type='email'
+            id='email'
+            name='email'
             value={credentials.email}
             onChange={handleInputChange}
             required
-            placeholder="Digite seu email"
+            placeholder='Digite seu email'
             disabled={isLoading}
           />
         </div>
 
-        <div className="login__form--group">
-          <label htmlFor="password" className="login__label">
+        <div className='login__form-group'>
+          <label htmlFor='password' className='login__form-label'>
             Senha
           </label>
           <input
-            type="password"
-            id="password"
-            name="password"
+            className='login__form-input'
+            type='password'
+            id='password'
+            name='password'
             value={credentials.password}
             onChange={handleInputChange}
             required
-            placeholder="Digite sua senha"
+            placeholder='Digite sua senha'
             disabled={isLoading}
           />
         </div>
 
-        <button type="submit" className="login__btn" disabled={isLoading}>
-          {isLoading ? (
-            <>
-              <div className="login__spinner"></div>
-              Entrando...
-            </>
-          ) : (
-            <>
-              <i className="login__signIn"></i>
-              Entrar
-            </>
-          )}
-        </button>
+        <div className='login__btn-wrapper'>
+          <button type='submit' className='login__btn' disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <div className='login__btn-spinner'></div>
+                Entrando...
+              </>
+            ) : (
+              <>
+                <i className='login__btn-signIn'></i>
+                Entrar
+              </>
+            )}
+          </button>
+        </div>
 
-        {error && <div className="login__error-message">{error}</div>}
+        {error && <div className='login__error-message'>{error}</div>}
       </form>
     </div>
   );
