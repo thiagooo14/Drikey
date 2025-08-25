@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { RegisterCredentials } from '../types';
-import { useAuth } from '../hooks/useAuth';
+import type { RegisterCredentials } from '../../types';
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
