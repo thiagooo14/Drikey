@@ -1,5 +1,6 @@
 import axios from 'axios';
 import bcrypt from 'bcryptjs';
+import { jwtDecode } from 'jwt-decode';
 import type {
   User,
   LoginCredentials,
@@ -163,10 +164,9 @@ class AuthService {
       name: user.name,
       role: user.role,
       iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 horas
+      exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
     };
 
-    // Em produção, usar uma biblioteca JWT adequada e chave secreta
     const encodedHeader = btoa(JSON.stringify(header));
     const encodedPayload = btoa(JSON.stringify(payload));
     const signature = btoa(`signature_${user.id}_${Date.now()}`);
@@ -176,19 +176,7 @@ class AuthService {
 
   decodeJWT(token: string): Record<string, unknown> | null {
     try {
-      const parts = token.split('.');
-      if (parts.length !== 3) {
-        return null;
-      }
-
-      const payload = JSON.parse(atob(parts[1]));
-
-      // Verificar se o token não expirou
-      if (typeof payload.exp !== 'number' || payload.exp < Math.floor(Date.now() / 1000)) {
-        return null;
-      }
-
-      return payload;
+      return jwtDecode(token);
     } catch {
       return null;
     }
