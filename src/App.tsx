@@ -8,7 +8,7 @@ import {
 import AuthProvider from './context/AuthProvider';
 import Home from './page/Home/Home';
 import ProtectedRoute from './components/ProtectedRoute';
-import Dashboard from './page/Dashboard';
+import Dashboard from './page/Dashboard/Dashboard';
 
 function App() {
   return (
